@@ -1,45 +1,43 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer } from '@react-navigation/native';
-import React from 'react';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import Detailed from '../screens/detailed';
-import Home from '../screens/home';
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Ionicons } from "@expo/vector-icons"; // Import Ionicons from react-native-vector-icons
+import Home from "../screens/Home";
+import { Navbar } from "../screens/Person";
 
 const Tab = createBottomTabNavigator();
+export const TabNavigation = () => {
+  return (
+    <NavigationContainer>
+      <Tab.Navigator
+        screenOptions={({ route }) => ({
+          tabBarIcon: ({ focused, color, size }) => {
+            let iconName;
 
-export default function TabNavigation() {
-	return (
-		<NavigationContainer>
-			<Tab.Navigator
-				screenOptions={({ route }) => ({
-					tabBarIcon: ({ focused, color, size }) => {
-						let iconName;
+            if (route.name === "Home") {
+              iconName = focused ? "home" : "home-outline";
+            } else if (route.name === "Navbar") {
+              iconName = focused ? "menu" : "menu-outline";
+            }
 
-						if (route.name === 'Home') {
-							iconName = focused ? 'home' : 'home-outline';
-						} else if (route.name === 'Details') {
-							iconName = focused ? 'settings' : 'settings-outline';
-						}
-
-						return (
-							<Ionicons name={iconName} size={size} color={color} />
-						);
-					},
-					tabBarActiveTintColor: 'crimson',
-					tabBarInactiveTintColor: 'black',
-				})}
-			>
-				<Tab.Screen
-					name='Home'
-					component={Home}
-					options={{ headerShown: false }}
-				/>
-				<Tab.Screen
-					name='Details'
-					component={Detailed}
-					options={{ headerShown: false, tabBarBadge: 10 }}
-				/>
-			</Tab.Navigator>
-		</NavigationContainer>
-	);
-}
+            // You can return any component that you like here!
+            return <Ionicons name={iconName} size={size} color={color} />;
+          },
+          tabBarActiveTintColor: "blue",
+          tabBarInactiveTintColor: "gray",
+        })}
+      >
+        <Tab.Screen
+          name="Home"
+          component={Home}
+          options={{ headerShown: false }}
+        />
+        <Tab.Screen
+          name="Navbar"
+          component={Navbar}
+          options={{ headerShown: false, tabBarBadge: 20 }}
+        />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+};
