@@ -23,6 +23,7 @@ export const fetchTrendingMovie = () => {
   return apiRequest(trendingMovie);
 };
 
+
 export const fetchUpcamingMovie = () => {
   return apiRequest(upcamingMovie);
 };
